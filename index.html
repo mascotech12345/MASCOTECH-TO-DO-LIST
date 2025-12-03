@@ -1,635 +1,658 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>To-Do List App</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="shortcut icon" href="./MASCOTECH.jpg" type="image/x-icon">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(180deg, #FCD34D 50%, #60A5FA 50%);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 420px;
+        background: white;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .input-area {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .input-area input {
+        flex: 1;
+        padding: 10px 12px;
+        border: none;
+        border-bottom: 2px solid #aaa;
+        outline: none;
+        font-size: 16px;
+    }
+
+    .input-area button {
+        background: #4c8bf5;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    .task-count {
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    .task {
+        display: flex;
+        align-items: center;
+        background: #f7f7f7;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .task input {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+    }
+
+    .task.completed label {
+        text-decoration: line-through;
+        color: #888;
+        font-style: italic;
+    }
+
+    .task label {
+        flex: 1;
+        font-size: 16px;
+    }
+
+    .edit-btn, .delete-btn {
+        border: none;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        margin-left: 6px;
+    }
+
+    .edit-btn {
+        background: #4c8bf5;
+    }
+
+    .delete-btn {
+        background: #e84a4a;
+    }
+
+    .material-icons {
+        font-size: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Review Presentation">
+        <button onclick="addTask()">Add</button>
+    </div>
+
+    <div class="task-count">
+        You have <span id="taskCounter">0</span> task(s) to complete
+    </div>
+
+    <div id="taskList"></div>
+</div>
+
+<script>
+    let taskList = [];
+
+    function addTask() {
+        const input = document.getElementById("taskInput");
+        const taskText = input.value.trim();
+        if (taskText === ""){
+            alert("You have to input a task")
+            return
+        }
+
+        taskList.push({ text: taskText, completed: false });
+        input.value = "";
+        renderTasks();
+    }
+
+    function toggleTask(index) {
+        taskList[index].completed = !taskList[index].completed;
+        renderTasks();
+    }
+
+    function editTask(index) {
+        const newText = prompt("Edit task:", taskList[index].text);
+        if (newText) {
+            taskList[index].text = newText.trim();
+            renderTasks();
+        }
+    }
+
+    function deleteTask(index) {
+        taskList.splice(index, 1);
+        renderTasks();
+    }
+
+    function renderTasks() {
+        const taskListDiv = document.getElementById("taskList");
+        taskListDiv.innerHTML = "";
+
+        let remaining = 0;
+
+        taskList.forEach((task, index) => {
+            if (!task.completed) remaining++;
+
+            const taskDiv = document.createElement("div");
+            taskDiv.className = "task" + (task.completed ? " completed" : "");
+
+            taskDiv.innerHTML = `
+                <input type="checkbox" ${task.completed ? "checked" : ""} onclick="toggleTask(${index})">
+                <label>${task.text}</label>
+                <button class="edit-btn" onclick="editTask(${index})">
+                    <span class="material-icons">edit</span>
+                </button>
+                <button class="delete-btn" onclick="deleteTask(${index})">
+                    <span class="material-icons">delete</span>
+                </button>
+            `;
+
+            taskListDiv.appendChild(taskDiv);
+        });
+
+        document.getElementById("taskCounter").innerText = remaining;
+    }
+</script>
+
+</body>
+</html>
+ -->
+
+
+
+<!-- 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List App</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="./MASCOTECH.jpg" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #FCD34D 50%, #60A5FA 50%);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 420px;
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px 12px;
+      border: none;
+      border-bottom: 2px solid #aaa;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .input-area button {
+      background: #4c8bf5;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .task-count {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    /* UL/LI based list styling */
+    #taskList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #taskList li {
+      display: flex;
+      align-items: center;
+      background: #f7f7f7;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      gap: 10px;
+    }
+
+    #taskList li .task-checkbox {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    #taskList li label {
+      flex: 1;
+      font-size: 16px;
+      cursor: default;
+      user-select: none;
+      overflow-wrap: anywhere;
+    }
+
+    #taskList li.completed label {
+      text-decoration: line-through;
+      color: #888;
+      font-style: italic;
+    }
+
+    .task-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .edit-btn, .delete-btn {
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      min-height: 36px;
+    }
+
+    .edit-btn { background: #4c8bf5; }
+    .delete-btn { background: #e84a4a; }
+
+    .material-icons { font-size: 20px; line-height: 1; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="input-area">
+      <input type="text" id="taskInput" placeholder="Review Presentation" aria-label="New task">
+      <button id="addBtn" type="button" aria-label="Add task">Add</button>
+    </div>
+
+    <div class="task-count">
+      You have <span id="taskCounter">0</span> task(s) to complete
+    </div>
+
+    <!-- Changed the task container to a UL for semantic list
+    <ul id="taskList" aria-live="polite"></ul>
+  </div>
+
+  <script>
+  let tasks = [];
+
+  const taskInput = document.getElementById("taskInput");
+  const taskList = document.getElementById("taskList");
+  const taskCounter = document.getElementById("taskCounter");
+  const addBtn = document.getElementById("addBtn");
+
+  // Load tasks from localStorage when page opens
+  function loadTasks() {
+    let saved = localStorage.getItem("myTasks");
+    if (saved) {
+      tasks = JSON.parse(saved);
+    }
+    showTasks();
+  }
+
+  // Save tasks to localStorage
+  function saveTasks() {
+    localStorage.setItem("myTasks", JSON.stringify(tasks));
+  }
+
+  // Add a task
+  function addTask() {
+    let text = taskInput.value.trim();
+    if (text === "") {
+      alert("Please type a task.");
+      return;
+    }
+
+    tasks.push({ text: text, done: false });
+    taskInput.value = "";
+    showTasks();
+    saveTasks();
+  }
+
+  addBtn.addEventListener("click", addTask);
+  taskInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") addTask();
+  });
+
+  // Show tasks in the UL list
+  function showTasks() {
+    taskList.innerHTML = "";
+
+    let left = 0;
+
+    tasks.forEach(function (task, i) {
+      if (!task.done) left++;
+
+      let li = document.createElement("li");
+
+      let check = document.createElement("input");
+      check.type = "checkbox";
+      check.checked = task.done;
+      check.className = "task-checkbox";
+      check.onclick = function () {
+        task.done = !task.done;
+        showTasks();
+        saveTasks();
+      };
+
+      let label = document.createElement("label");
+      label.textContent = task.text;
+
+      if (task.done) li.className = "completed";
+
+      let editBtn = document.createElement("button");
+      editBtn.className = "edit-btn";
+      editBtn.innerHTML = '<span class="material-icons">edit</span>';
+      editBtn.onclick = function () {
+        let newText = prompt("Edit your task:", task.text);
+        if (newText !== null && newText.trim() !== "") {
+          task.text = newText.trim();
+        }
+        showTasks();
+        saveTasks();
+      };
+
+      let delBtn = document.createElement("button");
+      delBtn.className = "delete-btn";
+      delBtn.innerHTML = '<span class="material-icons">delete</span>';
+      delBtn.onclick = function () {
+        tasks.splice(i, 1);
+        showTasks();
+        saveTasks();
+      };
+
+      let btns = document.createElement("div");
+      btns.className = "task-buttons";
+      btns.appendChild(editBtn);
+      btns.appendChild(delBtn);
+
+      li.appendChild(check);
+      li.appendChild(label);
+      li.appendChild(btns);
+
+      taskList.appendChild(li);
+    });
+
+    taskCounter.textContent = left;
+  }
+
+  // Load tasks when page opens
+  loadTasks();
+</script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="./netflix-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <title>Netflix.com.ng</title>
+    <title>To-Do List App</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #FCD34D 50%, #60A5FA 50%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 420px;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid #aaa;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .input-area button {
+            background: #4c8bf5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 5px;
+        }
+
+        ul li {
+            background: #f7f7f7;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        ul li.completed .task-text {
+            text-decoration: line-through;
+            color: #888;
+            font-style: italic;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .task-text {
+            flex: 1;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .material-icons {
+            font-size: 20px;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 6px;
+            cursor: pointer;
+            border-radius: 6px;
+            color: white;
+            margin-left: 6px;
+        }
+
+        .edit-btn {
+            background: #4c8bf5;
+        }
+
+        .delete-btn {
+            background: #e84a4a;
+        }
+    </style>
 </head>
-<body class="bg-black">
-    <div class="ss">
-        <nav class="navbar">
-            <div class="container-fluid">
-                <h1>
-                       <div class="fw-bolder text-md-start text-danger  my-3 display-5 text-md-start my" id="jj"> NETFLIX</div>
-                </h1>
-                <a href="#" class="navbar-brand btn btns btn-danger border-0 btn-bolder fw-bolder text-light text-md-end">
-                    <span class="">Sign Up</span>
-                </a>
-            </div>
-        </nav>
-        <section>
-            <div class="container-lg text-center text-md-center align-items-center my-5">
-                            <p class="display-4 text-light fw-bolder">Unlimited movies, <span class="sswss">TV</span> <br>  shows, and more</p>
-                        <h5>
-                            <div class="text-light fw-bold">Starts at ₦2,500. Cancel anytime.</div>
-                        </h5>
-                        <p class="text-light">Ready to watch? Enter your email to create or restart your membership.</p>
-                        <div class="rounded col-lg-12  text-center ">
-                            <input class=" border border-1 col-lg-4 fw-bold text-light border-secondary bg-transparent p-3 mr-5" type="email" name="" id="email" placeholder="Email address">
-                            <button class="btn btns btn-lg col-lg-2 btn-danger border-0 p-3 btn-bolder">Get Started  ></button>
-                        </div>
-            </div>
-        </section>
-        <section>
-            <div class="container-lg dd">
 
-            </div>
-        </section>
-    </div>
-    <div class="cdno border-5 border-top border-danger container-md">
-        <h4>
-            <div class="text-light text-md-start">Trending Now</div>
-        </h4>
-        <div class="rounded di">
-            <div class="w border-0 ms-3 rounded ">
-                <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#reg-modal">
-                    <img class="rounded"   src="assets/tokill.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">1</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#eg-modal">
-                    <img class="rounded"   src="assets/wednes.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">2</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#g-modal">
-                    <img class="rounded"   src="assets/dev.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">3</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#-modal">
-                    <img class="rounded"   src="assets/fatal.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">4</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#modal">
-                    <img class="rounded"   src="assets/one.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">5</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#odal">
-                    <img class="rounded"   src="assets/squid.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">6</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#dal">
-                    <img class="rounded"   src="assets/blood.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">7</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#al">
-                    <img class="rounded"   src="assets/old.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">8</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#l">
-                    <img class="rounded"   src="assets/k-pop.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">9</h1>
-            </div>
-            <div class="w border-0 rounded">
-                 <button class="bg-black border-0" type="button" data-bs-toggle="modal" data-bs-target="#a">
-                    <img class="rounded"   src="assets/sand.png" alt="">
-                </button>
-                <h1 class="text-white display-1 fw-bolder tt">10</h1>  
-            </div>
-        </div>
-    </div>
-        <div class="modal fade container-sm w-sm-100" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary ff text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body g ">
-                        <img src="assets/tokilla.png" class="img-fluid" alt="TO KILL A MONKEY">
-                        <div class="ps-3 gap-2 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Show</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Thrillers</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Dramas</h6>
-                        </div>
-                        <p class="ps-3 d-sm-none d-md-inline-flex">
-                            Enticed into the lucrative world of cybercrime, a struggling father faces a moral <br>
-                            minefield where every choice leads him to greater compromises.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
+<body>
+
+    <div class="container">
+        <h2>To-Do List</h2>
+
+        <div class="input-area">
+            <input type="text" id="taskInput" placeholder="Review Presentation">
+            <button onclick="addTask()">Add</button>
         </div>
 
-
-        
-        <div class="modal fade container-lg w-sm-100" id="eg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary ffl text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <img src="assets/wednesday.png" class="img-fluid" alt="WEDNESDAY">
-                        <div class="ps-3 gap-1  s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2024</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">18+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Show</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Fantacy</h6>
-                        </div>
-                        <p class="ps-3">
-                            Smart, sarcastic and a little dead inside, Wednesday Addams investigates twisted <br> 
-                            mysteries while making new friends — and foes — at Nevermore Academy.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade container-lg w-sm-100" id="g-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary f text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">DEVIL IS A LIAR</h1>
-                        <div class="ps-3 py-2 gap-2 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">18+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Thrillers</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Dramas</h6>
-                        </div>
-                        <p class="ps-3">
-                            A successful realtor falls for a charismatic younger man, but the life they build <br> 
-                            together crumbles under the weight of unthinkable tragedy and betrayal.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade container-lg w-sm-100" id="-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">FATAL SEDUCTION</h1>
-                        <div class="ps-3 py-2 gap-2 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">18+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Show</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Thrillers</h6>
-                        </div>
-                        <p class="ps-3">
-                            A married professor is pulled into a passionate affair with a younger man that <br> 
-                            uncovers a path of tragedy and betrayal from those closest to her.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-         <div class="modal fade container-lg w-sm-100" id="modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">ONE OF THEM DAYS</h1>
-                        <div class="ps-3 py-2 gap-3 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                        </div>
-                        <p class="ps-3">
-                            Scrambling to repay their stolen rent money, best friends Dreux and Alyssa embark <br> 
-                            on a frantic race across LA to find enough cash to avoid eviction.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="modal fade container-lg w-sm-100" id="odal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">SQUID GAME</h1>
-                        <div class="ps-3 py-2 gap-3 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                        </div>
-                        <p class="ps-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus et eos <br> 
-                            reiciendis magni quidem, explicabo cum adipisci placeat ratione rerum repellendus.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
-        
-        <div class="modal fade container-lg w-sm-100" id="dal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">BLOOD BROTHERS</h1>
-                        <div class="ps-3 py-2 gap-3 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                        </div>
-                        <p class="ps-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus et eos <br> 
-                            reiciendis magni quidem, explicabo cum adipisci placeat ratione rerum repellendus.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="modal fade container-lg w-sm-100" id="al" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body gh">
-                        <h1 class="ps-3">THE OLD GUARD 2</h1>
-                        <div class="ps-3 py-2 gap-3 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                        </div>
-                        <p class="ps-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus et eos <br> 
-                            reiciendis magni quidem, explicabo cum adipisci placeat ratione rerum repellendus.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade container-lg w-sm-100" id="l" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body h">
-                        <h1 class="ps-3">K-POP DEMON HUNTERS</h1>
-                        <div class="ps-3 py-2 gap-2 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">10+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Action</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Kids</h6>
-                        </div>
-                        <p class="ps-3">
-                            When K-pop superstars Rumi, Mira and Zoey aren't selling out stadiums, they're <br> 
-                            using their secret powers to protect their fans from supernatural threats.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <div class="modal fade container-lg w-sm-100" id="a" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content border-1 border-secondary l text-light">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="close"></button>
-                    </div>
-                    <div class="modal-body g">
-                        <h1 class="ps-3">THE SAND MAN</h1>
-                        <div class="ps-3 py-2 gap-3 s">
-                            <h6 class="bg-secondary border-0 rounded p-1">2025</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">16+</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Movie</h6>
-                            <h6 class="bg-secondary border-0 rounded p-1">Comedies</h6>
-                        </div>
-                        <p class="ps-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus et eos <br> 
-                            reiciendis magni quidem, explicabo cum adipisci placeat ratione rerum repellendus.
-                        </p>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-start">
-                        <button class="btn btns btn-lg btn-danger border-0 btn-bolder text-light te">Get Started  ></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="container-md">
-        <h4>
-            <div class="text-light text-md-start">More Reason To Watch</div>
-        </h4>
-     <div class="cdns row gap-3">
-            <div class="p-1 col-lg-4 col-md-12 rounded coo">
-                <h3>
-                    <div class="text-light fw-bold">Enjoy on your tv</div>
-                    <h5>
-                        <div class="fw-bold text-black">Watch on Smart TVs, Playstation, Xbox, <br> 
-                            Chromecast, Apple TV, Blu- <br> 
-                            ray players, and more.
-                        </div>
-                    </h5>
-                </h2>
-            </div>
-            <div class="p-1 col-lg-4 col-md-12 rounded coo">
-               <h3>
-                    <div class="text-light fw-bold">Download your  shows to watch offline</div>
-                </h3>
-                    <h5>
-                        <div class="fw-bold text-black">Save your favorites easily and always have something to watch.
-                        </div>
-                    </h5>
-            </div>
-            <div class="p-1 col-lg-4 col-md-12 rounded coo">
-                <h3>
-                    <div class="text-light fw-bold">Watch everywhere</div>
-                </h3>
-                    <h5>
-                        <div class="fw-bold text-black">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.
-                        </div>
-                    </h5>
-            </div>  
-            <div class="p-1 col-lg-4 col-md-12 rounded coo">
-                <h3>
-                    <div class="text-light fw-bold">Create profiles for kids</div>
-                </h3>
-                    <h5>
-                        <div class="fw-bold text-black">Send kids on adventures with their favorite characters in a space made just for them — free with your membership.
-                        </div>
-                    </h5>
-            </div>
-    </div>
+        <ul id="taskList"></ul>
     </div>
 
-    <section>
-        <div class="container-md">
-            <h4>
-                <div class="text-light text-md-start">Frequently Asked Questions</div>
-            </h4>
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-1">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-1" aria-expanded="false" aria-controls="cc-1">
-                            What Is Netflix?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse show" id="cc-1" aria-labelledby="hd-1" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>Netflix is a streaming service that offers a wide variety of award-winnings, movies, <br>
-                                anime, documentaries, and more on thousands of internet-connected devices. <br> <br>
-                                You can watch as much as you want, whenever you want without a single commercial – all for one low monthly price. There's always something new to discover and new TV shows and movies are added every week!
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<script>
+    let tasks = [];
 
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-2">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-2" aria-expanded="false" aria-controls="cc-2">
-                            How Much Does Netflix Cost?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse" id="cc-2" aria-labelledby="hd-2" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one <br>
-                                 fixed monthly fee. Plans range from ₦2,500 to ₦8,500 a month. No extra costs, no contracts.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    window.onload = () => {
+        let saved = localStorage.getItem("tasks");
+        if (saved) {
+            tasks = JSON.parse(saved);
+            showTasks();
+        }
+    };
 
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-3">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-3" aria-expanded="false" aria-controls="cc-3">
-                           Where Can I Watch?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse" id="cc-3" aria-labelledby="hd-3" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles. <br> <br>
-                                You can also download your favorite shows with the iOS or Android app. Use downloads to watch while you're on the go and without an internet connection. Take Netflix with you anywhere.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    function save() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
 
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-4">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-4" aria-expanded="false" aria-controls="cc-4">
-                           How Do I Cancel?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse" id="cc-4" aria-labelledby="hd-4" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    function addTask() {
+        let input = document.getElementById("taskInput");
+        let text = input.value.trim();
 
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-5">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-5" aria-expanded="false" aria-controls="cc-5">
-                           What Can I Watch On Netflix?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse" id="cc-5" aria-labelledby="hd-5" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        if (text === "") {
+            alert("You must enter a task.");
+            return;
+        }
 
-            <div class="accordion" id="ddt">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hd-6">
-                        <button class="accordion-button collapsed bg-secondary fw-bold text-light border-0 border-black border" type="button" data-bs-toggle="collapse" data-bs-target="#cc-6" aria-expanded="false" aria-controls="cc-6">
-                           Is Netflix Good For Kids?
-                        </button>
-                    </h2>
-                    <div class="accordion-collapse collapse" id="cc-6" aria-labelledby="hd-6" data-bs-parent="#cc">
-                        <div class="accordion-body text-light bg-secondary">
-                            <h4>The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space. <br> <br>
-                                Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-            <div class="container-lg text-center text-md-center align-items-center my-5">
-                        <p class="text-light">Ready to watch? Enter your email to create or restart your membership.</p>
-                        <div class="rounded col-lg-12  text-center ">
-                            <input class=" border border-1 col-lg-6 fw-bold text-light border-secondary bg-transparent p-3 mr-5" type="email" name="" id="email" placeholder="Email address">
-                            <button class="btn btns btn-lg col-lg-2 btn-danger border-0 p-3 btn-bolder">Get Started  ></button>
-                        </div>
-            </div>
-        </section>
-        <section>
-            <div class="container-md">
-                <div class="row">
-                    <u class="text-secondary">
-                        <h5>Questions? Contact Us</h5>
-                    </u>
-                    <ul class="ul col-lg-3">
-                        <li class="li">
-                            <a href="" class="text-secondary">FAQ</a>
-                        </li>
+        tasks.push({ text: text, done: false });
+        input.value = "";
+        save();
+        showTasks();
+    }
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Investors Relations</a>
-                        </li>
+    function toggleTask(i) {
+        tasks[i].done = !tasks[i].done;
+        save();
+        showTasks();
+    }
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Privacy</a>
-                        </li>
+    function deleteTask(i) {
+        tasks.splice(i, 1);
+        save();
+        showTasks();
+    }
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Speed Test</a>
-                        </li>
-                    </ul>
-                    <ul class="ul col-lg-3">
-                        <li class="li">
-                            <a href="" class="text-secondary">Help Centers</a>
-                        </li>
+    function editTask(i) {
+        let updated = prompt("Edit task:", tasks[i].text);
+        if (updated && updated.trim() !== "") {
+            tasks[i].text = updated.trim();
+            save();
+            showTasks();
+        }
+    }
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Jobs</a>
-                        </li>
+    function showTasks() {
+        let list = document.getElementById("taskList");
+        list.innerHTML = "";
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Cookie Preferences</a>
-                        </li>
+        tasks.forEach((task, i) => {
+            let li = document.createElement("li");
+            if (task.done) li.classList.add("completed");
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Legal Notice</a>
-                        </li>
-                    </ul>
-                    <ul class="ul col-lg-3">
-                        <li class="li">
-                           <a href="" class="text-secondary">Account</a>
-                        </li>
+            li.innerHTML = `
+                <input type="checkbox" class="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${i})">
+                <span class="task-text" onclick="toggleTask(${i})">${task.text}</span>
+                <span class="material-icons edit-btn" onclick="editTask(${i})">edit</span>
+                <span class="material-icons delete-btn" onclick="deleteTask(${i})">delete</span>
+            `;
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Ways To Watch</a>
-                        </li>
+            list.appendChild(li);
+        });
+    }
+</script>
 
-                        <li class="li">
-                            <a href="" class="text-secondary">Corporate Information</a>
-                        </li>
-
-                        <li class="li">
-                            <a href="" class="text-secondary">Only On Netflix</a>
-                        </li>
-                    </ul>
-                    <ul class="ul col-lg-3">
-                        <li class="li">
-                            <a href="" class="text-secondary">Media</a>
-                        </li>
-
-                        <li class="li">
-                            <a href="" class="text-secondary">Terms Of Use</a>
-                        </li>
-
-                        <li class="li">
-                            <a href="" class="text-secondary">Contact Us now</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-
-        <section>
-            <div class="container-md">
-                <select name="" id="" class="ll bg-black text-light fw-bold border-2 rounded p-2 border-light">
-                    <option value="">English</option>
-                </select>
-                <h6 class="my-4 text-secondary">Netflix Nigeria</h6>
-                <p class="text-secondary my-4">This page is protected by Google reCAPTCHA to ensure you're not a bot. <span class="text-primary navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dollars" aria-controls="dollars" aria-expanded="false" aria-label="Toggle navigation"><u>learn more</u></span></p>
-                <p class="text-secondary my-4 collapse navbar-collapse" id="dollars">The information collected by Google reCAPTCHA is subject to the Google <span><a href="">Privacy Policy</a></span> and <span><a href="">Terms of Service</a></span>, and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is not used for personalized advertising by Google).</p>
-            </div>
-        </section>
-
-  <script src="./bootstrap-5.3.0-alpha3-dist/js/bootstrap.min.js"></script>
-  <script src="./index.js"></script>
 </body>
 </html>
